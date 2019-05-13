@@ -42,14 +42,6 @@ public class MatchmakingController : MonoBehaviour
 
         if (!networkManager.matchMaker)
             networkManager.StartMatchMaker();
-
-        // Attach callback function to UI input field
-        inputField = GameObject.Find("RoomNameInput");
-        inputField.GetComponent<InputField>().onEndEdit.AddListener(SetRoomName);
-
-        // Attach callback function to "Create Match" button
-        createMatchBtn = GameObject.Find("Create Room");
-        createMatchBtn.GetComponent<Button>().onClick.AddListener(CreateRoom);
     }
 
     /// <summary>
@@ -107,8 +99,9 @@ public class MatchmakingController : MonoBehaviour
     /// <summary>
     /// Create a matchmaking room with a given name and max number of players.
     /// </summary>
-    void CreateRoom()
+    public void CreateRoom()
     {
+        print("Creating Room");
         // Rooms must be named
         if (roomName.Equals(""))
             return;

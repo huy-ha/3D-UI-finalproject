@@ -17,11 +17,20 @@ public class UIController : MonoBehaviour
     GameObject HostMenu;
 
     GameObject MyProfile;
-    GameObject Background;
 
+    // so it can be set hidden during edit mode
+    [SerializeField]
+    GameObject Panels;
+    [SerializeField]
+    GameObject Menus;
+    [SerializeField]
+    GameObject Background;
     private void Init()
     {
         // Locate corresponding GameObjects in the scene
+        Panels.SetActive(true);
+        Menus.SetActive(true);
+        Background.SetActive(true);
         StartMenu = GameObject.Find("StartMenu");
         JoinMenu = GameObject.Find("JoinMenu");
         HostMenu = GameObject.Find("HostMenu");
@@ -33,7 +42,6 @@ public class UIController : MonoBehaviour
         TurnText = TurnPanel.GetComponentsInChildren<TextMeshProUGUI>()[0];
         TurnTimeText = TurnPanel.GetComponentsInChildren<TextMeshProUGUI>()[1];
 
-        Background = GameObject.Find("Background");
         MyProfile = GameObject.Find("MyProfile");
 
         // Set up event handlers

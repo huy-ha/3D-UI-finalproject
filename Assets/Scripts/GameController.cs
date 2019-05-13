@@ -17,12 +17,15 @@ public class GameController : MonoBehaviour
     private static bool GameHappening; //if GameIsHappening, then no new players can join
 
     // Start is called before the first frame update
+    private void Awake()
+    {
+        GameHappening = false;
+        LocalPlayer = null;
+    }
     void Start()
     {
         UI = GetComponent<UIController>();
         d = GetComponent<ARDebugger>();
-        GameHappening = false;
-        LocalPlayer = null;
     }
 
     public static PlayerController GetPlayer(string _ID)

@@ -156,27 +156,27 @@ public class PlayerController : NetworkBehaviour
 
     #region Shooting
     [Command]
-    public void CmdShoot()
+    public void CmdShoot(Vector3 direction)
     {
         //spawn grenade.
         GameObject Grenade = Instantiate(AM.Get("Grenade"));
         NetworkServer.Spawn(Grenade);
         Grenade.gameObject.name = "Grenade " + Grenade.GetComponent<NetworkIdentity>().netId.ToString();
-        RpcShoot(Grenade);
+        RpcShoot(Grenade, direction);
     }
 
     [ClientRpc]
-    public void RpcShoot(GameObject Grenade)
+    public void RpcShoot(GameObject Grenade, Vector3 direction)
     {
         GameObject Planet = AM.Get("Planet");
         Planet.GetComponent<Planet>().AddRigidbody(Grenade.GetComponent<Rigidbody>());
         Grenade.transform.parent = Planet.transform;
         Grenade.transform.position = TC.GetCurrentPlayer().ShootingPoint.transform.position;
-        Vector3 F = TC.GetCurrentPlayer().transform.forward;
+        Vector3 F = direction;
         Vector3 n = TC.GetCurrentPlayer().transform.position - Planet.transform.position;
         n.Normalize();
         F = F + n;
-        F = F * 60f;
+        F = F * 30f;
         Grenade.GetComponent<Grenade>().Throw(F);
         TC.Shooting = true;
         print("Set Shooting to " + TC.Shooting);

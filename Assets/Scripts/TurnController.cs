@@ -265,9 +265,9 @@ public class TurnController : NetworkBehaviour
         return Walking;
     }
 
-    public void Attack()
+    public void Attack(Vector3 direction)
     {
-        Players[currentPlayer].CmdShoot();
+        Players[currentPlayer].CmdShoot(direction);
     }
 
     public PlayerController GetCurrentPlayer()
